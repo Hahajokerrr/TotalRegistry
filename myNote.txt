@@ -1,0 +1,39 @@
+*)Section 10: Account creating and security
+Auth chỉ coi là một model ảo - coi là authenticated session, không phải là model trong database. Khi đăng nhập thành công thì tạo, khi log out thì destroy.
+
+ +)có thể sử dụng constructor để khai báo middleware
+
++)'email' => 'required|email|unique:users'
+validate để email là unique trong bảng users
+
+'password' => 'required|min:8|confirmed'
+confirmed để cho xác nhận mật khẩu
+
+make: tạo dữ liệu nhưng chưa lưu
+create: tạo dữ liệu và lưu vào db
+
++) mutator
+
+*) Section 11:
+-policy nếu khai báo đúng tên và trong đúng thư mục thì không cần register
+  +) model_namePolicy
+
+policy method sẽ đc gọi trc controller method tương ứng
+
+  +)$this->authorize('view', $listing);
+
+  ==
+
+    if (Auth::user()->cannot('view', $listing)) {
+        abort(403);
+    };
+
+
+dang den 117
+
+
+*) Có một bảng trong csdl là bảng phân quyền: AccessRights
+*) Phải xử lý hợp thức cả backend và frontend
+Nói chung là đọc file an ninh (Ch08)
+*) Backend biết bị tấn công khi người dùng nhập giao thức không hợp lệ
+Tức là khi backend validate thất bại

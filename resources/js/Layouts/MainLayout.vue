@@ -3,10 +3,10 @@
         <div class = "container mx-auto">
             <nav class = "p-4 flex items-center justify-between">
                 <div class = "text-lg font-medium">
-                    <Link :href = "route('listing.index')">Listing</Link>
+                    <Link :href = "route('listing.index')">Danh sách đăng kiểm</Link>
                 </div>
                 <div class = "text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
-                    <Link :href = "route('listing.index')">LaraZillow</Link>
+                    <Link :href = "route('listing.index')">Total Registry</Link>
                 </div>
                 <!--only display the user if the user is authenticated-->
                 <div v-if="user" class="flex items-center gap-4">

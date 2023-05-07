@@ -1,11 +1,12 @@
 <template>
     <span>
-    {{ listing.street }} {{ listing.street_nr }}, {{ listing.city }}
+    Biển số xe: {{ car.registration_no }}
     </span>
 </template>
 
 <script setup>
 defineProps({
-    listing: Object
+    listing: Object,
+    car: Object
 })
 </script>

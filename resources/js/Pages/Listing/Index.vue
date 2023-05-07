@@ -1,7 +1,7 @@
 <template>
-    <Filters :filters="filters"/>
+    <!-- <Filters :filters="filters"/> -->
     <div class = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        <Listing v-for="listing in listings.data" :key="listing.id" :listing="listing">
+        <Listing v-for="listing in listings.data" :key="listing.id" :listing="listing" :car="listing.car">
         </Listing>
     </div>
 
@@ -18,6 +18,7 @@ import Filters from './Index/Components/Filters.vue'
 import Listing from './Index/Components/Listing.vue';
 defineProps({
     listings: Object,
-    filters: Object,
+    // filters: Object,
+    car: Object
 })
 </script>

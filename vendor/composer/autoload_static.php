@@ -31,6 +31,7 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
+        '91cd72fb7bd7a6f5a6c660e7cce30924' => __DIR__ . '/..' . '/buihuycuong/vnfaker/src/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '98caa11a197f6516a8e48aa4abb5ccc6' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/helpers.php',
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
@@ -171,6 +172,7 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
         ),
         'B' => 
         array (
+            'Buihuycuong\\Vnfaker\\' => 20,
             'Brick\\Math\\' => 11,
             'Barryvdh\\Debugbar\\' => 18,
         ),
@@ -526,6 +528,10 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
+        'Buihuycuong\\Vnfaker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/buihuycuong/vnfaker/src',
+        ),
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
@@ -554,9 +560,12 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndexController.php',
         'App\\Http\\Controllers\\ListingController' => __DIR__ . '/../..' . '/app/Http/Controllers/ListingController.php',
+        'App\\Http\\Controllers\\RealtorListingController' => __DIR__ . '/../..' . '/app/Http/Controllers/RealtorListingController.php',
+        'App\\Http\\Controllers\\UserAccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserAccountController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -568,8 +577,13 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\Car' => __DIR__ . '/../..' . '/app/Models/Car.php',
+        'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
         'App\\Models\\Listing' => __DIR__ . '/../..' . '/app/Models/Listing.php',
+        'App\\Models\\Province' => __DIR__ . '/../..' . '/app/Models/Province.php',
+        'App\\Models\\Series' => __DIR__ . '/../..' . '/app/Models/Series.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Policies\\ListingPolicy' => __DIR__ . '/../..' . '/app/Policies/ListingPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -636,6 +650,8 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
         'Brick\\Math\\Internal\\Calculator\\GmpCalculator' => __DIR__ . '/..' . '/brick/math/src/Internal/Calculator/GmpCalculator.php',
         'Brick\\Math\\Internal\\Calculator\\NativeCalculator' => __DIR__ . '/..' . '/brick/math/src/Internal/Calculator/NativeCalculator.php',
         'Brick\\Math\\RoundingMode' => __DIR__ . '/..' . '/brick/math/src/RoundingMode.php',
+        'Buihuycuong\\Vnfaker\\VNFaker' => __DIR__ . '/..' . '/buihuycuong/vnfaker/src/VNFaker.php',
+        'Buihuycuong\\Vnfaker\\VNFakerServiceProvider' => __DIR__ . '/..' . '/buihuycuong/vnfaker/src/VNFakerServiceProvider.php',
         'Carbon\\AbstractTranslator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/AbstractTranslator.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonConverterInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonConverterInterface.php',
@@ -730,7 +746,9 @@ class ComposerStaticInit8b7a3bf36cb9a42d2a52866ee17cde1f
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\CountryFactory' => __DIR__ . '/../..' . '/database/factories/CountryFactory.php',
         'Database\\Factories\\ListingFactory' => __DIR__ . '/../..' . '/database/factories/ListingFactory.php',
+        'Database\\Factories\\ProvinceFactory' => __DIR__ . '/../..' . '/database/factories/ProvinceFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'DebugBar\\Bridge\\CacheCacheCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/CacheCacheCollector.php',

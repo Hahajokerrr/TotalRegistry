@@ -18,17 +18,16 @@ class ListingController extends Controller
 
     public function index(Request $request)
     {
-        $filters = $request->only([
-            'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
-        ]);
-
+        // $filters = $request->only([
+        //     'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
+        // ]);
 
         return inertia(
             'Listing/Index',
             [
-                'filters' => $filters,
-                'listings' => Listing::mostRecent()->filter($filters)
-                ->paginate(9)->withQueryString()
+                // 'filters' => $filters,
+                'listings' => Listing::mostRecent()->with('car')->/*filter($filters)
+                ->*/paginate(9)->withQueryString()
             ]
         );
     }
@@ -49,14 +48,7 @@ class ListingController extends Controller
     {
         $request->user()->listings()->create(
             $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:20|max:2000',
-                'city' => 'required',
-                'code' => 'required',
-                'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
+
             ])
         );
 
@@ -94,16 +86,16 @@ class ListingController extends Controller
     public function update(Request $request, Listing $listing)
     {
         $listing->update(
-            $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:20|max:2000',
-                'city' => 'required',
-                'code' => 'required',
-                'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
-            ])
+            // $request->validate([
+            //     'beds' => 'required|integer|min:0|max:20',
+            //     'baths' => 'required|integer|min:0|max:20',
+            //     'area' => 'required|integer|min:20|max:2000',
+            //     'city' => 'required',
+            //     'code' => 'required',
+            //     'street' => 'required',
+            //     'street_nr' => 'required|min:1|max:1000',
+            //     'price' => 'required|integer|min:1|max:20000000',
+            // ])
         );
 
         return redirect()->route('listing.index')->with('success', 'Listing was changed!');

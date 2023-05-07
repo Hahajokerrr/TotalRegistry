@@ -31,7 +31,7 @@ class Listing extends Model
     }
 
     public function scopeMostRecent(Builder $query): Builder {
-        return $query->orderByDesc('created_at');
+        return $query->orderByDesc('inspection_date');
     }
 
     // public function scopeFilter(Builder $query, array $filters): Builder

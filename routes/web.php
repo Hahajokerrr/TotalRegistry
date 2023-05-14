@@ -21,4 +21,5 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
 
 Route::get('/listing/create/{registrationNo}', [CarController::class, 'search']);
+Route::get('/listing/create/show/{registrationNo}', [CarController::class, 'show']);
 //->name('cars.search');

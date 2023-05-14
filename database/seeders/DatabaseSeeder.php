@@ -172,13 +172,13 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        // $persons = Person::all();
-        // $companies = Company::all();
-        // $provinceIds = Province::pluck('id')->toArray();
-        // $seriesIds = Series::pluck('id')->toArray();
+        $persons = Person::all();
+        $companies = Company::all();
+        $provinceIds = Province::pluck('id')->toArray();
+        $seriesIds = Series::pluck('id')->toArray();
 
 
-        // for ($i = 0; $i < 200; $i++) {
+        // for ($i = 0; $i < 400; $i++) {
         //         $car = new Car();
         //         $car->registration_no = $faker->unique()->randomElement([
         //             $faker->regexify('\d{2}-[A-Z]\d \d{5}'),

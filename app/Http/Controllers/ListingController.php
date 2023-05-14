@@ -26,8 +26,8 @@ class ListingController extends Controller
             'Listing/Index',
             [
                 // 'filters' => $filters,
-                'listings' => Listing::mostRecent()->with('car')/*->filter($filters)*/
-                ->paginate(10)->withQueryString()
+                'listings' => Listing::mostRecent()->with('car.owner')/*->filter($filters)*/
+                ->paginate(12)->withQueryString()
             ]
         );
     }
@@ -64,6 +64,8 @@ class ListingController extends Controller
         //     abort(403);
         // };
         //$this->authorize('view', $listing);
+
+        $listing->load(['car.owner', 'car.series.brand', 'car.series.country', 'car.province']);
 
         return inertia(
             'Listing/Show',

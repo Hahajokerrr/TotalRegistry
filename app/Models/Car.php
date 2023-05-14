@@ -29,4 +29,13 @@ class Car extends Model
         return $this->hasMany(Listing::class, 'car_id');
     }
 
+    public function getName()
+    {
+        if($this->owner_type == 'App\Models\Company') {
+            return $this->owner->company_name;
+        } else {
+            return $this->owner->person_name;
+        }
+    }
+
 }

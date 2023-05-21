@@ -12,7 +12,7 @@ class Listing extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = ['car_id', 'inspection_date', 'expiration_date'];
 
     // determine which attributes can be sorted
     protected $sortable = [

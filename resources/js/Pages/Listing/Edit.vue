@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="create">
+    <form @submit.prevent="update">
         <div class="grid gap-2 grid-cols-5">
             <Box class="col-start-1 col-end-3">
                 <div>
@@ -29,7 +29,7 @@
                         {{ form.errors.expiration_date }}
                     </div>
                 </div>
-                <button type="submit" class="btn-primary mt-4">Tạo đăng kiểm mới</button>
+                <button type="submit" class="btn-primary mt-4">Chỉnh sửa đăng kiểm</button>
             </Box>
 
             <div class="col-start-3 col-end-6">
@@ -56,7 +56,6 @@
     </form>
 </template>
 
-
 <script setup>
 import CarInformation from '@/Components/CarInformation.vue';
 import PersonInformation from '@/Components/PersonInformation.vue';
@@ -67,18 +66,29 @@ import { ref, watch, shallowRef, defineExpose } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3'
 import Multiselect from 'vue-multiselect';
 
-const selectedCar = ref(null);
+const props = defineProps({
+    listing: Object,
+  })
+
+const selectedCar = ref(props.listing.car);
 const matchingCars = ref([]);
 const isLoading = ref(false);
-const carInfo = ref(null);
+const carInfo = ref(props.listing.car);
 const ownerTypeComponent = shallowRef(null);
+if (carInfo.value.owner_type == 'App\\Models\\Company') {
+    ownerTypeComponent.value = CompanyInformation;
+} else {
+    ownerTypeComponent.value = PersonInformation;
+}
 
 // declare form
 const form = useForm({
-    car_id: null,
-    inspection_date: null,
-    expiration_date: null,
+    car_id: props.listing.car_id,
+    inspection_date: props.listing.inspection_date,
+    expiration_date: props.listing.expiration_date,
 })
+
+
 
 // get method to query for car according to registration_no
 const searchCars = async (query) => {
@@ -113,9 +123,13 @@ watch(selectedCar, async (newValue) => {
             console.error(error);
         }
     } else {
-        carInfo.value = null;
-        ownerTypeComponent = null;
-        form.car_id = null;
+        carInfo.value = props.listing.car;
+        if (carInfo.value.owner_type == 'App\\Models\\Company') {
+            ownerTypeComponent.value = CompanyInformation;
+        } else {
+            ownerTypeComponent.value = PersonInformation;
+        }
+        form.car_id = props.listing.car.id;
     }
 });
 
@@ -129,10 +143,10 @@ const getOneYearAgo = () => {
 
 // const create = () => form.post(route('listing.store'));
 
-// pot method, using custom error message
-const create = async () => {
+// post method, using custom error message
+const update = async () => {
   try {
-    await form.post(route('listing.store'));
+    await form.put(route('listing.update', {listing: props.listing.id}));
   } catch ({ response }) {
       form.errors = response.data.errors;
   }
@@ -140,7 +154,3 @@ const create = async () => {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-
-
-
-

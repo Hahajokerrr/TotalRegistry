@@ -8,7 +8,7 @@
             </Link>
         </div>
         <div class="flex mt-2">
-            <Link :href="route('listing.edit', {listing: listing.id})">Edit</Link>
+            <Link :href="route('listing.edit', {listing: listing.id})">Chỉnh sửa</Link>
         </div>
     </Box>
 </template>

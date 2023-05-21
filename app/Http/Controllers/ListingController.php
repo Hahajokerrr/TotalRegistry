@@ -22,12 +22,13 @@ class ListingController extends Controller
         //     'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
         // ]);
 
+        $userId = Auth::id();
         return inertia(
             'Listing/Index',
             [
                 // 'filters' => $filters,
-                'listings' => Listing::mostRecent()->with('car.owner')/*->filter($filters)*/
-                ->paginate(12)->withQueryString()
+                'listings' => Listing::mostRecent()->where('by_user_id', $userId)->with('car.owner')/*->filter($filters)*/
+                ->paginate(9)->withQueryString()
             ]
         );
     }
@@ -48,11 +49,25 @@ class ListingController extends Controller
     {
         $request->user()->listings()->create(
             $request->validate([
-
+                'car_id' => 'required|integer',
+                'inspection_date' => [
+                    'required',
+                    'date',
+                    'after_or_equal:' . date('Y-m-d', strtotime('-1 year')),
+                ],
+                'expiration_date' => 'required|date_format:Y-m-d|after_or_equal:'.date('Y-m-d', strtotime('+1 year', strtotime($request->inspection_date))),
+            ], [
+                'car_id.required' => 'Bạn chưa chọn xe được đăng kiểm',
+                'inspection_date.required' => 'Bạn chưa chọn ngày thực hiện đăng kiểm',
+                'inspection_date.date' => 'Ngày đăng kiểm chưa đúng định dạng',
+                'inspection_date.after_or_equal' => 'Ngày đăng kiểm không được quá 1 năm kể trước ngày hôm nay',
+                'expiration_date.required' => 'Bạn chưa chọn ngày hết hạn đăng kiểm',
+                'expiration_date.date' => 'Ngày hết hạn chưa đúng định dạng',
+                'expiration_date.after_or_equal' => 'Ngày hết hạn đăng kiểm phải là ít nhất 1 năm kể từ ngày thực hiện đăng kiểm',
             ])
         );
 
-        return redirect()->route('listing.index')->with('success', 'Listing was created!');
+        return redirect()->route('listing.index')->with('success', 'Đăng kiểm thành công!');
     }
 
     /**
@@ -77,10 +92,11 @@ class ListingController extends Controller
 
     public function edit(Listing $listing)
     {
+        $listing->load(['car.owner', 'car.series.brand', 'car.series.country', 'car.province']);
         return inertia(
             'Listing/Edit',
             [
-                'listing' => $listing
+                'listing' => $listing,
             ]
         );
     }
@@ -88,19 +104,26 @@ class ListingController extends Controller
     public function update(Request $request, Listing $listing)
     {
         $listing->update(
-            // $request->validate([
-            //     'beds' => 'required|integer|min:0|max:20',
-            //     'baths' => 'required|integer|min:0|max:20',
-            //     'area' => 'required|integer|min:20|max:2000',
-            //     'city' => 'required',
-            //     'code' => 'required',
-            //     'street' => 'required',
-            //     'street_nr' => 'required|min:1|max:1000',
-            //     'price' => 'required|integer|min:1|max:20000000',
-            // ])
+            $request->validate([
+                'car_id' => 'required|integer',
+                'inspection_date' => [
+                    'required',
+                    'date',
+                    'after_or_equal:' . date('Y-m-d', strtotime('-1 year')),
+                ],
+                'expiration_date' => 'required|date_format:Y-m-d|after_or_equal:'.date('Y-m-d', strtotime('+1 year', strtotime($request->inspection_date))),
+            ], [
+                'car_id.required' => 'Bạn chưa chọn xe được đăng kiểm',
+                'inspection_date.required' => 'Bạn chưa chọn ngày thực hiện đăng kiểm',
+                'inspection_date.date' => 'Ngày đăng kiểm chưa đúng định dạng',
+                'inspection_date.after_or_equal' => 'Ngày đăng kiểm không được quá 1 năm kể trước ngày hôm nay',
+                'expiration_date.required' => 'Bạn chưa chọn ngày hết hạn đăng kiểm',
+                'expiration_date.date' => 'Ngày hết hạn chưa đúng định dạng',
+                'expiration_date.after_or_equal' => 'Ngày hết hạn đăng kiểm phải là ít nhất 1 năm kể từ ngày thực hiện đăng kiểm',
+            ])
         );
 
-        return redirect()->route('listing.index')->with('success', 'Listing was changed!');
+        return redirect()->route('listing.index')->with('success', 'Bản đăng kiểm đã được chỉnh sửa!');
     }
 
 }

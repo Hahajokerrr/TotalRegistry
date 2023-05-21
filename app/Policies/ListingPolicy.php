@@ -15,6 +15,8 @@ class ListingPolicy
         if ($user?->is_admin) {
             return true;
         }
+
+        return null;
     }
     /**
      * Determine whether the user can view any models.
@@ -29,7 +31,7 @@ class ListingPolicy
      */
     public function view(?User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->by_user_id;
     }
 
     /**

@@ -7,12 +7,13 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UserAccountController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [IndexController::class, 'index']);
-Route::get('/hello', [IndexController::class, 'show'])->middleware('auth');
+Route::get('/', [AuthController::class, 'create']);
 
-Route::resource('/listing', ListingController::class)->only(['create', 'store', 'edit', 'update'])->middleware('auth');
+// Route::resource('/listing', ListingController::class)->only(['create', 'store', 'edit', 'update'])->middleware('auth');
 
-Route::resource('/listing', ListingController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+// Route::resource('/listing', ListingController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+
+Route::resource('/listing', ListingController::class)->middleware('auth');
 
 Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');

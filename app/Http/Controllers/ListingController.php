@@ -18,16 +18,26 @@ class ListingController extends Controller
 
     public function index(Request $request)
     {
-        // $filters = $request->only([
-        //     'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
-        // ]);
+        $filters = $request->only([
+            'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
+        ]);
+        if($request->user()->is_admin) {
+            return inertia(
+                'Listing/Index',
+                [
+                    'filters' => $filters,
+                    'listings' => Listing::mostRecent()->with(['car.owner', 'car.series.brand', 'car.province', 'user'])/*->filter($filters)*/
+                    ->paginate(9)->withQueryString()
+                ]
+            );
+        }
 
         $userId = Auth::id();
         return inertia(
             'Listing/Index',
             [
-                // 'filters' => $filters,
-                'listings' => Listing::mostRecent()->where('by_user_id', $userId)->with('car.owner')/*->filter($filters)*/
+                'filters' => $filters,
+                'listings' => Listing::mostRecent()->where('by_user_id', $userId)->with(['car.owner', 'car.series.brand', 'car.province', 'user.province'])/*->filter($filters)*/
                 ->paginate(9)->withQueryString()
             ]
         );
@@ -80,7 +90,7 @@ class ListingController extends Controller
         // };
         //$this->authorize('view', $listing);
 
-        $listing->load(['car.owner', 'car.series.brand', 'car.series.country', 'car.province']);
+        $listing->load(['car.owner.ward.district.province', 'car.series.brand', 'car.series.country', 'car.province']);
 
         return inertia(
             'Listing/Show',
@@ -92,7 +102,7 @@ class ListingController extends Controller
 
     public function edit(Listing $listing)
     {
-        $listing->load(['car.owner', 'car.series.brand', 'car.series.country', 'car.province']);
+        $listing->load(['car.owner.ward.district.province', 'car.series.brand', 'car.series.country', 'car.province', 'user']);
         return inertia(
             'Listing/Edit',
             [

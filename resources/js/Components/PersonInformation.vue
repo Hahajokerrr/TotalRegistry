@@ -22,10 +22,7 @@
             E-mail: {{ listing.car.owner.email }}
         </div>
         <div>
-            Địa chỉ thường trú: {{ listing.car.owner.address }}
-        </div>
-        <div>
-            Quê quán: {{ listing.car.owner.hometown }}
+            Địa chỉ thường trú: {{ listing.car.owner.ward.full_name }}, {{ listing.car.owner.ward.district.full_name }}, {{ listing.car.owner.ward.district.province.full_name }}
         </div>
     </div>
     <div v-else>
@@ -51,10 +48,7 @@
             E-mail: {{ car.owner.email }}
         </div>
         <div>
-            Địa chỉ thường trú: {{ car.owner.address }}
-        </div>
-        <div>
-            Quê quán: {{ car.owner.hometown }}
+            Địa chỉ thường trú: {{ car.owner.ward.full_name }}, {{ car.owner.ward.district.full_name }}, {{ car.owner.ward.district.province.full_name }}
         </div>
     </div>
 </template>

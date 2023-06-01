@@ -3,6 +3,7 @@
         <div class="grid gap-2 grid-cols-5">
             <Box class="col-start-1 col-end-3">
                 <div>
+                    <!-- multiselect input to choose registration_no of the car and error message -->
                     <label for="registration_no" class="label mb-3">Biển số xe:</label>
                     <multiselect v-model="selectedCar" label="registration_no" id="registration_no" :options="matchingCars"
                         :searchable="true" :loading="isLoading" :clear-on-select="true" :options-limit="20"
@@ -13,6 +14,7 @@
                         {{ form.errors.car_id }}
                     </div>
                 </div>
+                <!-- date picker input to choose inspection date (can only choose at most one year ago from present) and error message -->
                 <div>
                     <label class="label mb-0 mt-4">Ngày thực hiện đăng kiểm</label><br>
                     <input class="input" type="date" id="inspection_date" v-model="form.inspection_date"
@@ -21,6 +23,7 @@
                         {{ form.errors.inspection_date }}
                     </div>
                 </div>
+                <!-- date picker input to choose expiration date (can only choose at least one year away from registration date) and error message -->
                 <div>
                     <label class="label mt-4 mb-0">Ngày hết hạn đăng kiểm</label><br>
                     <input class="input" type="date" id="expiration_date" v-model="form.expiration_date"
@@ -32,6 +35,7 @@
                 <button type="submit" class="btn-primary mt-4">Chỉnh sửa đăng kiểm</button>
             </Box>
 
+            <!-- Info of the chosen car -->
             <div class="col-start-3 col-end-6">
                 <Box class="mb-2">
                     <!--using slot named header-->
@@ -44,7 +48,6 @@
                 </Box>
                 <Box>
                     <template #header>
-                        <!-- use a ternary operator to determine the component to render -->
                         <div>Thông tin về chủ sở hữu</div>
                     </template>
                     <div v-if="carInfo">
@@ -62,7 +65,7 @@ import PersonInformation from '@/Components/PersonInformation.vue';
 import CompanyInformation from '@/Components/CompanyInformation.vue';
 import Box from '@/Components/UI/Box.vue';
 import axios from 'axios';
-import { ref, watch, shallowRef, defineExpose } from 'vue';
+import { ref, watch, shallowRef } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3'
 import Multiselect from 'vue-multiselect';
 
@@ -140,8 +143,6 @@ const getOneYearAgo = () => {
     return oneYearAgo.toISOString().split('T')[0];
 };
 
-
-// const create = () => form.post(route('listing.store'));
 
 // post method, using custom error message
 const update = async () => {

@@ -18,7 +18,7 @@ class CarController extends Controller
     public function show($registrationNo)
     {
         $car = Car::where('registration_no', 'like', $registrationNo)->first();
-        $car->load(['owner', 'series.brand', 'series.country', 'province']);
+        $car->load(['owner.ward.district.province', 'series.brand', 'series.country', 'province']);
         return response()->json($car);
     }
 

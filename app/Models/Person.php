@@ -13,4 +13,10 @@ class Person extends Model
     {
         return $this->morphMany(Car::class, 'owner');
     }
+
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id');
+    }
+
 }

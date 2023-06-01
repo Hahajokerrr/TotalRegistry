@@ -15,8 +15,7 @@ class ListingPolicy
         if ($user?->is_admin) {
             return true;
         }
-
-        return null;
+        //return null;
     }
     /**
      * Determine whether the user can view any models.

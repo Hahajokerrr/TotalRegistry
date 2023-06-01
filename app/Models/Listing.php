@@ -19,7 +19,7 @@ class Listing extends Model
         'price', 'created_at'
     ];
 
-    public function owner(): BelongsTo {
+    public function user(): BelongsTo {
         return $this->belongsTo(\App\Models\User::class,
             'by_user_id'
         );

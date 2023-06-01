@@ -24,6 +24,11 @@ class Car extends Model
         return $this->belongsTo(Province::class, 'province_id');
     }
 
+    public function purpose()
+    {
+        return $this->belongsTo(Purpose::class, 'purpose_id');
+    }
+
     public function listing()
     {
         return $this->hasMany(Listing::class, 'car_id');

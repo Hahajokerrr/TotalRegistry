@@ -60,4 +60,9 @@ class User extends Authenticatable
             'by_user_id'
         );
     }
+
+    public function province()
+    {
+        return $this->belongsTo(\App\Models\Province::class, 'province_id');
+    }
 }

@@ -5,6 +5,9 @@
                 <div class = "text-lg font-medium">
                     <Link :href = "route('listing.index')">Danh sách đăng kiểm</Link>
                 </div>
+                <div class = "text-lg font-medium">
+                    <Link :href = "route('user-statistics')">Thống kê dữ liệu</Link>
+                </div>
                 <div class = "text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                     <Link :href = "route('listing.index')">Total Registry</Link>
                 </div>

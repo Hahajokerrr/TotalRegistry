@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\UserAccountController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,7 @@ Route::resource('user-account', UserAccountController::class)->only(['create', '
 
 Route::get('/listing/create/{registrationNo}', [CarController::class, 'search']);
 Route::get('/listing/create/show/{registrationNo}', [CarController::class, 'show']);
+
+Route::get('statistics/user-statistics', [StatisticsController::class, 'userStatistics'])->name('user-statistics');
+
 //->name('cars.search');

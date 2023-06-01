@@ -9,7 +9,9 @@ use App\Models\Company;
 use App\Models\Country;
 use App\Models\Person;
 use App\Models\Province;
+use App\Models\purpose;
 use App\Models\Series;
+use App\Models\Ward;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Buihuycuong\Vnfaker\VNFaker;
@@ -143,20 +145,21 @@ class DatabaseSeeder extends Seeder
         // }
 
 
-
-        // for ($i = 0; $i < 40; $i++) {
+        // $wardIds = Ward::pluck('code')->toArray();
+        // for ($i = 0; $i < 200; $i++) {
 
         //     Person::create([
-        //         'person_name' => vnfaker()->fullname(),
+        //         'name' => vnfaker()->fullname(),
         //         'citizen_id' => $faker->unique()->randomElement($citizen_id),
         //         'dob' => $faker->dateTimeBetween('1940-01-01', '2004-12-31')->format('Y-m-d'),
-        //         'address' => $faker->address(),
-        //         'hometown' => $faker->address(),
+        //         'ward_code' => $faker->randomElement($wardIds),
         //         'phone' => $faker->unique()->regexify('^0[0-9]{9}$'),
         //         'email' => $faker->unique()->email(),
         //         'gender' => $faker->randomElement(["nam", "nữ"])
         //     ]);
         // }
+
+        // $wardIds = Ward::pluck('code')->toArray();
 
         // $companies =[];
         // for($i=0; $i<100; $i++) {
@@ -165,17 +168,18 @@ class DatabaseSeeder extends Seeder
 
         // for ($i = 0; $i < 50; $i++) {
         //     Company::create([
-        //         'company_name' => $faker->unique()->randomElement($companies),
-        //         'address' => $faker->unique()->address(),
+        //         'name' => $faker->unique()->randomElement($companies),
+        //         'ward_code' => $faker->randomElement($wardIds),
         //         'phone' => $faker->unique()->regexify('^0[0-9]{9}$'),
         //         'email' => $faker->unique()->email(),
         //     ]);
         // }
 
-        $persons = Person::all();
-        $companies = Company::all();
-        $provinceIds = Province::pluck('id')->toArray();
-        $seriesIds = Series::pluck('id')->toArray();
+        // $persons = Person::all();
+        // $companies = Company::all();
+        // $provinceIds = Province::pluck('code')->toArray();
+        // $seriesIds = Series::pluck('id')->toArray();
+        // $purposeIds = Purpose::pluck('id')->toArray();
 
 
         // for ($i = 0; $i < 400; $i++) {
@@ -184,31 +188,35 @@ class DatabaseSeeder extends Seeder
         //             $faker->regexify('\d{2}-[A-Z]\d \d{5}'),
         //             $faker->regexify('\d{2}-[A-Z]\d \d{4}')
         //         ]);
+        //         $car->registration_code  = $faker->unique()->regexify('[A-Z0-9]{12}');
         //         $car->owner_type = $faker->randomElement(['App\Models\Person', 'App\Models\Company']);
         //         if ($car->owner_type === 'App\Models\Person') {
         //             $car->owner_id = $faker->randomElement($persons)->id;
         //         } else {
         //             $car->owner_id = $faker->randomElement($companies)->id;
         //         }
-        //         $car->province_id = $faker->randomElement($provinceIds);
+        //         $car->province_code = $faker->randomElement($provinceIds);
         //         $car->registration_date = $faker->dateTimeBetween('-10 years', 'now')->format('Y-m-d');
         //         $car->series_id = $faker->randomElement($seriesIds);
-        //         $car->purpose = $faker->randomElement(['Cá nhân', 'Thương mại']);
+        //         $car->engine_no = $faker->regexify('[A-Z0-9]{10}');
+        //         $car->chasis_no = $faker->regexify('[A-Z0-9]{15}');
+        //         $car->purpose_id = $faker->randomElement($purposeIds);
         //         $car->save();
         //     }
 
-        // $car_ids = Car::pluck('id')->toArray();
+        $car_ids = Car::pluck('id')->toArray();
 
-        // for ($i = 0; $i < 20; $i++) {
-        //         $listing = new \App\Models\Listing();
-        //         $listing->by_user_id = 1;
-        //         $listing->car_id = $faker->unique()->randomElement($car_ids);
-        //         $listing->inspection_date = $faker->dateTimeBetween('-5 years', 'now')->format('Y-m-d');
-        //         $expiration_date = new \DateTime($listing->inspection_date);
-        //         $expiration_date->modify('+3 years');
-        //         $listing->expiration_date = $expiration_date->format('Y-m-d');
-        //         $listing->save();
-        //     }
+        for ($i = 0; $i < 5000; $i++) {
+                $listing = new \App\Models\Listing();
+                $listing->by_user_id = 3;
+                $listing->car_id = $faker->unique()->randomElement($car_ids);
+                $listing->inspection_date = $faker->dateTimeBetween('-5 years', 'now')->format('Y-m-d');
+                $listing->listing_code = $faker->unique()->regexify('[A-Z0-9]{12}');
+                $expiration_date = new \DateTime($listing->inspection_date);
+                $expiration_date->modify('+3 years');
+                $listing->expiration_date = $expiration_date->format('Y-m-d');
+                $listing->save();
+            }
 
     }
 }

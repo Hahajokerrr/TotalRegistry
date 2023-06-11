@@ -8,6 +8,9 @@
                 <div class = "text-lg font-medium">
                     <Link :href = "route('user-statistics')">Thống kê dữ liệu</Link>
                 </div>
+                <div v-if="isAdmin" class="text-lg font-medium">
+                    <Link :href="route('car-register')">Cập nhật xe đăng ký</Link>
+                </div>
                 <div class = "text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                     <Link :href = "route('listing.index')">Total Registry</Link>
                 </div>
@@ -46,5 +49,6 @@ const flashSuccess = computed(
 const user = computed(
     () => page.props.value.user
 )
+const isAdmin = computed(() => user.value.is_admin);
 </script>
 

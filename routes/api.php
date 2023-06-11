@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/user-statistics/monthly-count/{year}', [StatisticsController::class, 'countListingsByMonth']);
-Route::get('/user-statistics/quarterly-count/{year}', [StatisticsController::class, 'countListingsByQuarter']);
-Route::get('/user-statistics/yearly-count', [StatisticsController::class, 'countListingsByYear']);
+// Route::get('/user-statistics/monthly-count/{year}', [StatisticsController::class, 'countListingsByMonth']);
+// Route::get('/user-statistics/quarterly-count/{year}', [StatisticsController::class, 'countListingsByQuarter']);
+// Route::get('/user-statistics/yearly-count', [StatisticsController::class, 'countListingsByYear']);
+// Route::get('/user-statistics/expiring-count', [StatisticsController::class, 'countExpiringListings']);
